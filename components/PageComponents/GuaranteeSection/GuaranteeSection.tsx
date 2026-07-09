@@ -37,9 +37,9 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
   },
   {
     icon: faShieldHalved,
-    title: "1-Year Parts & Labor Warranty",
+    title: "Green Lawn Guarantee · 2-Year Parts",
     description:
-      "Every repair we perform is covered for a full year — parts and labor. If it fails within 12 months, we fix it at no charge.",
+      "New installs include 2-year parts coverage and our Green Lawn Guarantee on workmanship. If our coverage design fails in window, we make it right.",
   },
   {
     icon: faRotateLeft,
@@ -49,15 +49,15 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
   },
   {
     icon: faCertificate,
-    title: "NATE-Certified Technicians",
+    title: "Licensed Irrigators",
     description:
-      "Every tech who enters your home is NATE-certified and TDLR-licensed. No apprentices working alone — ever.",
+      "Every technician who works on your system is a licensed irrigator. No unlicensed subs working alone — ever.",
   },
   {
     icon: faCalendarCheck,
     title: "No Contracts. No Lock-In.",
     description:
-      "Our maintenance plans are month-to-month. We earn your business with every visit — not by holding you hostage with a contract.",
+      "We earn your business with every visit — not by holding you hostage with a multi-year service contract.",
   },
   {
     icon: faStar,
@@ -80,7 +80,6 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
     <section className={styles.section} aria-label="Our Guarantees">
       <div className={styles.container}>
 
-        {/* Left: headline + CTA */}
         <div className={styles.leftCol}>
           <span className={styles.eyebrow}>{title}</span>
           <h2 className={styles.headline}>
@@ -92,7 +91,7 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
             ))}
           </h2>
           <p className={styles.body}>
-            Every HVAC company in Central Texas makes promises. We back ours in writing — with flat-rate pricing, certified technicians, and a 1-year warranty on every repair we touch.
+            Every irrigation company in Central Texas makes promises. We back ours in writing — with flat-rate pricing, licensed irrigators, and a Green Lawn Guarantee · 2-Year Parts on New Installs on installs we design and build.
           </p>
           <Link
             href={ctaLink}
@@ -117,11 +116,10 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
                 </svg>
               ))}
             </div>
-            <span className={styles.ratingText}>4.9 · 300+ verified Google reviews</span>
+            <span className={styles.ratingText}>4.9 · 1,050+ verified Google reviews</span>
           </div>
         </div>
 
-        {/* Right: guarantee cards */}
         <div className={styles.rightCol}>
           <div className={styles.grid}>
             {guarantees.map((g, i) => (

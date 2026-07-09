@@ -14,11 +14,11 @@ interface AuthorBioProps {
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Joshua Feliciano",
+  name: "Seth Moreno",
   jobTitle: "Founder & Lead Developer",
   worksFor: {
     "@type": "Organization",
-    name: "Scott Applications",
+    name: "AquaArc Irrigation",
     url: "https://www.scottapplications.com",
   },
   url: "https://www.scottapplications.com/about",
@@ -32,13 +32,13 @@ const personSchema = {
     "Digital Marketing", "Central Texas Business",
   ],
   description:
-    "Founder of Scott Applications in Waco, TX. 10+ years building websites, custom software, and digital marketing solutions for Central Texas businesses. Direct developer — no middlemen.",
+    "Owner of AquaArc Irrigation in Waco, TX. Licensed irrigator serving Central Texas since 2012 with flat-rate pricing and a Green Lawn Guarantee.",
 };
 
 const AuthorBio: React.FC<AuthorBioProps> = ({
   cityName,
   imageSrc = "/pages/seo-template-resources/owner.jpg",
-  imageAlt = "Joshua Feliciano - Founder of Scott Applications",
+  imageAlt = "Seth Moreno - Owner of AquaArc Irrigation",
 }) => {
   const trackEvent = useTrackEvent();
 
@@ -67,8 +67,8 @@ const AuthorBio: React.FC<AuthorBioProps> = ({
         </div>
 
         <div className={styles.content}>
-          <p className={styles.role}>Founder & Lead Developer · Scott Applications</p>
-          <h2 className={styles.title}>Joshua Feliciano</h2>
+          <p className={styles.role}>Owner & Licensed Irrigator · AquaArc Irrigation</p>
+          <h2 className={styles.title}>Seth Moreno</h2>
 
           <p className={styles.description}>
             10+ years building websites, software, and marketing systems for Central Texas
@@ -95,7 +95,7 @@ const AuthorBio: React.FC<AuthorBioProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className={styles.linkedinLink}
-              aria-label="Connect with Joshua Feliciano on LinkedIn"
+              aria-label="Connect with Seth Moreno on LinkedIn"
               onClick={() => trackEvent({
                 eventType:    'click',
                 elementLabel: 'Connect on LinkedIn',

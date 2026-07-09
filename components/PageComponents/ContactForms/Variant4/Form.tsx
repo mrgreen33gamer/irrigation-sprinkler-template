@@ -11,7 +11,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck, faExclamationTriangle, faArrowRight, faArrowLeft,
-  faFan, faFire, faWrench, faFilter, faThermometerHalf, faWind, faBolt,
+  faWrench, faTint, faSeedling, faCogs, faSnowflake, faCalendarCheck, faBolt,
 } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getJourneyContext } from '&/useJourneyTracker';
@@ -22,13 +22,13 @@ interface Variant4Props {
 }
 
 const SERVICES = [
-  { icon: faFan,             label: 'AC Repair',        sub: 'System not cooling, strange noises' },
-  { icon: faFire,            label: 'Heating / Furnace', sub: 'Heat not working, furnace issues' },
-  { icon: faWrench,          label: 'New Installation',  sub: 'Replace or add a new system' },
-  { icon: faFilter,          label: 'Duct Cleaning',     sub: 'Improve airflow & air quality' },
-  { icon: faThermometerHalf, label: 'Maintenance',       sub: 'Tune-up, inspection, seasonal' },
-  { icon: faWind,            label: 'Air Quality',       sub: 'Filters, purifiers, humidity' },
-  { icon: faBolt,            label: 'Emergency',         sub: 'System down, urgent repair needed' },
+  { icon: faTint,          label: 'Sprinkler Install',  sub: 'New system design & install' },
+  { icon: faWrench,        label: 'Sprinkler Repair',   sub: 'Heads, leaks, valves, zones' },
+  { icon: faSeedling,      label: 'Drip Irrigation',    sub: 'Beds, trees, gardens' },
+  { icon: faCogs,          label: 'Smart Controllers',  sub: 'Weather-based app control' },
+  { icon: faSnowflake,     label: 'Winterization',      sub: 'Freeze prep & backflow' },
+  { icon: faCalendarCheck, label: 'Seasonal Tune-Ups',  sub: 'Spring start-up & checks' },
+  { icon: faBolt,          label: 'Emergency Leak',     sub: 'Active leak / blowout' },
 ];
 
 const BUDGET_LABELS = ['Under $500', '$500–$1,500', '$1,500–$5,000', '$5,000–$10,000', '$10,000+'];
@@ -143,7 +143,7 @@ export default function Variant4({ title, cityName, slug, spot, formVariant }: V
                   </div>
                   <h3 className={styles.successTitle}>You're All Set!</h3>
                   <p className={styles.successText}>
-                    A licensed Arctic Air tech will reach out about your <strong>{selectedService}</strong> service.
+                    A licensed AquaArc tech will reach out about your <strong>{selectedService}</strong> service.
                   </p>
                   <div className={styles.successSummary}>
                     <div className={styles.summaryRow}><span>Service</span><span>{selectedService}</span></div>

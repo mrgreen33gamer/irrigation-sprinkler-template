@@ -1,57 +1,56 @@
 // src/app/service-areas/layout.tsx
 import type { Metadata } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hvac-pro-template.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.aquaarcirrigation.com';
 const url = `${BASE_URL}/service-areas`;
 
 export const metadata: Metadata = {
-  title: 'HVAC Service Areas | Waco, Hewitt, Killeen, Temple & Central Texas | Arctic Air',
+  title: 'Irrigation Service Areas | Waco, Hewitt, Killeen, Temple & Central Texas | AquaArc',
   description:
-    'Arctic Air HVAC serves Waco, Hewitt, Woodway, Robinson, China Spring, Killeen, Temple, Valley Mills, Hillsboro, and all of Central Texas. Flat-rate pricing, same-day service, 1-year warranty.',
+    'AquaArc Irrigation serves Waco, Hewitt, Woodway, McGregor, China Spring, Killeen, Temple, Bellmead, and all of Central Texas. Flat-rate pricing, same-day service, Green Lawn Guarantee.',
   keywords: [
-    'HVAC service areas Central Texas',
-    'HVAC Waco TX',
-    'HVAC Hewitt TX',
-    'HVAC Killeen TX',
-    'HVAC Temple TX',
-    'AC repair Central Texas',
-    'heating repair Waco',
-    'Arctic Air HVAC service areas',
+    'irrigation service areas Central Texas',
+    'irrigation Waco TX',
+    'sprinkler repair Hewitt TX',
+    'irrigation Killeen TX',
+    'irrigation Temple TX',
+    'sprinkler installation Central Texas',
+    'AquaArc Irrigation service areas',
   ],
   alternates: { canonical: url },
   openGraph: {
-    title: 'HVAC Service Areas | Arctic Air HVAC — Central Texas',
+    title: 'Irrigation Service Areas | AquaArc Irrigation — Central Texas',
     description:
-      'Serving Waco and all of Central Texas with flat-rate HVAC repair, installation, and maintenance. Same-day service available.',
+      'Serving Waco and all of Central Texas with flat-rate irrigation repair, installation, and maintenance. Same-day service available.',
     url,
-    siteName: 'Arctic Air HVAC',
+    siteName: 'AquaArc Irrigation',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HVAC Service Areas | Arctic Air HVAC — Central Texas',
-    description: 'Serving Waco and all of Central Texas. Flat-rate pricing, same-day service, 1-year warranty.',
+    title: 'Irrigation Service Areas | AquaArc Irrigation — Central Texas',
+    description: 'Serving Waco and all of Central Texas. Flat-rate pricing, same-day service, Green Lawn Guarantee.',
   },
 };
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'HVACBusiness',
-  name: 'Arctic Air HVAC',
+  '@type': 'HomeAndConstructionBusiness',
+  name: 'AquaArc Irrigation',
   url: BASE_URL,
-  telephone: '+12549001234',
+  telephone: '+12549902020',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '4521 Bosque Blvd',
+    streetAddress: '900 S University Parks Dr',
     addressLocality: 'Waco',
     addressRegion: 'TX',
-    postalCode: '76710',
+    postalCode: '76706',
     addressCountry: 'US',
   },
   areaServed: [
-    'Waco, TX', 'Hewitt, TX', 'Woodway, TX', 'Robinson, TX',
-    'China Spring, TX', 'Killeen, TX', 'Temple, TX', 'Valley Mills, TX', 'Hillsboro, TX',
+    'Waco, TX', 'Hewitt, TX', 'Woodway, TX', 'McGregor, TX',
+    'China Spring, TX', 'Killeen, TX', 'Temple, TX', 'Bellmead, TX',
   ],
   openingHoursSpecification: [
     { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '07:00', closes: '18:00' },

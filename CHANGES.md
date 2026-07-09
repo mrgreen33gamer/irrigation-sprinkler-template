@@ -1,4 +1,4 @@
-# Arctic Air HVAC — UI Changes Package
+# AquaArc Irrigation — UI Changes Package
 
 ## How to apply
 

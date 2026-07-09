@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot, faPhone, faEnvelope,
-  faShieldHalved, faWrench, faClock, faSnowflake,
+  faShieldHalved, faWrench, faClock, faLeaf,
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import styles from './styles.module.scss';
@@ -19,30 +19,30 @@ const NAV_LINKS = [
 ];
 
 const SERVICE_LINKS = [
-  { href: '/services/ac-repair',          label: 'AC Repair' },
-  { href: '/services/heating',            label: 'Heating Service' },
-  { href: '/services/installation',       label: 'New Installation' },
-  { href: '/services/maintenance',        label: 'Maintenance Plans' },
-  { href: '/services/duct-cleaning',      label: 'Duct Cleaning' },
-  { href: '/services/indoor-air-quality', label: 'Indoor Air Quality' },
+  { href: '/services/sprinkler-install',  label: 'Sprinkler Installation' },
+  { href: '/services/sprinkler-repair',   label: 'Sprinkler Repair' },
+  { href: '/services/drip-irrigation',    label: 'Drip Irrigation' },
+  { href: '/services/smart-controllers',  label: 'Smart Controllers' },
+  { href: '/services/winterization',      label: 'Winterization' },
+  { href: '/services/seasonal-tuneups',   label: 'Seasonal Tune-Ups' },
 ];
 
 const LOCAL_AREAS = [
   'Waco, TX', 'Hewitt, TX', 'Woodway, TX',
-  'Robinson, TX', 'China Spring, TX', 'Temple, TX',
-  'Killeen, TX', 'Hillsboro, TX',
+  'McGregor, TX', 'China Spring, TX', 'Temple, TX',
+  'Killeen, TX', 'Bellmead, TX',
 ];
 
 const TRUST_ITEMS = [
   { icon: faShieldHalved, label: 'Licensed & Insured' },
-  { icon: faWrench,       label: 'NATE Certified' },
+  { icon: faWrench,       label: 'Licensed Irrigator' },
   { icon: faClock,        label: 'Same-Day Service' },
-  { icon: faSnowflake,    label: '1-Yr Warranty' },
+  { icon: faLeaf,         label: 'Green Lawn Guarantee' },
 ];
 
 const SOCIALS = [
-  { href: 'https://facebook.com/arcticairhvac', icon: faFacebookF, label: 'Facebook' },
-  { href: 'https://g.page/r/arcticairhvac',     icon: faGoogle,    label: 'Google' },
+  { href: 'https://facebook.com/aquaarcirrigation', icon: faFacebookF, label: 'Facebook' },
+  { href: 'https://g.page/r/aquaarcirrigation',     icon: faGoogle,    label: 'Google' },
 ];
 
 export default function Footer() {
@@ -51,7 +51,6 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
 
-      {/* ── TRUST STRIP ── */}
       <div className={styles.trustStrip}>
         <div className={styles.trustInner}>
           {TRUST_ITEMS.map(({ icon, label }) => (
@@ -70,47 +69,40 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── MAIN BODY ── */}
       <div className={styles.body}>
         <div className={styles.inner}>
 
-          {/* Col 1 — Brand */}
           <div className={styles.brandCol}>
             <Link href="/" className={styles.logo}>
               <span className={styles.logoMark}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="2" x2="12" y2="22"/>
-                  <line x1="2" y1="12" x2="22" y2="12"/>
-                  <polyline points="8 6 12 2 16 6"/>
-                  <polyline points="8 18 12 22 16 18"/>
-                  <polyline points="6 8 2 12 6 16"/>
-                  <polyline points="18 8 22 12 18 16"/>
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
                 </svg>
               </span>
               <div className={styles.logoText}>
-                <span className={styles.logoName}>Arctic Air HVAC</span>
+                <span className={styles.logoName}>AquaArc Irrigation</span>
                 <span className={styles.logoSub}>Waco, Texas</span>
               </div>
             </Link>
 
             <p className={styles.tagline}>
-              Flat-rate pricing. Same-day service. Zero contracts — ever. Serving Central Texas homeowners since 2010.
+              Flat-rate pricing. Same-day service. Zero contracts — ever. Serving Central Texas lawns and landscapes since 2012.
             </p>
 
             <div className={styles.contactBlock}>
-              <a href="tel:+12549001234" className={styles.phoneLink}
+              <a href="tel:+12549902020" className={styles.phoneLink}
                 onClick={() => trackEvent({ eventType: 'phone_click', elementLabel: 'Footer Phone', section: 'Footer-Brand' })}>
                 <FontAwesomeIcon icon={faPhone} />
-                (254) 900-1234
+                (254) 990-2020
               </a>
-              <a href="mailto:contact@arcticairhvac.com" className={styles.emailLink}
+              <a href="mailto:hello@aquaarcirrigation.com" className={styles.emailLink}
                 onClick={() => trackEvent({ eventType: 'email_click', elementLabel: 'Footer Email', section: 'Footer-Brand' })}>
                 <FontAwesomeIcon icon={faEnvelope} />
-                contact@arcticairhvac.com
+                hello@aquaarcirrigation.com
               </a>
               <span className={styles.addressLine}>
                 <FontAwesomeIcon icon={faLocationDot} />
-                4521 Bosque Blvd, Waco, TX 76710
+                900 S University Parks Dr, Waco, TX 76706
               </span>
             </div>
 
@@ -125,7 +117,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 — Nav */}
           <div className={styles.col}>
             <span className={styles.colHead}>Company</span>
             <ul className={styles.linkList}>
@@ -140,7 +131,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 — Services */}
           <div className={styles.col}>
             <span className={styles.colHead}>Our Services</span>
             <ul className={styles.linkList}>
@@ -155,7 +145,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4 — Service Areas */}
           <div className={styles.col}>
             <span className={styles.colHead}>Service Areas</span>
             <ul className={styles.areaList}>
@@ -172,16 +161,15 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── BOTTOM BAR ── */}
       <div className={styles.bottomBar}>
         <div className={styles.bottomInner}>
           <p className={styles.copyright}>
-            &copy; {new Date().getFullYear()} Arctic Air HVAC. All Rights Reserved. | TDLR License #XXXXXXXX
+            &copy; {new Date().getFullYear()} AquaArc Irrigation. All Rights Reserved. | Licensed Irrigator · Bonded & Insured
           </p>
-          <a href="tel:+12549001234" className={styles.emergencyBtn}
+          <a href="tel:+12549902020" className={styles.emergencyBtn}
             onClick={() => trackEvent({ eventType: 'phone_click', elementLabel: '24/7 Emergency', section: 'Footer-Bottom' })}>
             <span className={styles.emergencyDot} />
-            24/7 Emergency Line
+            Emergency Leak Line
           </a>
         </div>
       </div>
