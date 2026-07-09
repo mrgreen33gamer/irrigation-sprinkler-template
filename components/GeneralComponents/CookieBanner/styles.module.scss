@@ -259,3 +259,42 @@
     justify-content: center;
   }
 }
+
+/* === COOKIE UNIQUENESS — irrigation-sprinkler-template === */
+.backdrop {
+  bottom: 2rem !important;
+  right: 2rem !important;
+  left: auto !important;
+  top: auto !important;
+  max-width: 340px !important;
+  transform: none;
+}
+
+.card {
+  background: $obsidian !important;
+  border: 3px solid $orange !important;
+  border-radius: 0 !important;
+  padding: 1.75rem !important;
+  border-top: 3px solid $orange !important;
+  
+}
+
+.iconWrap {
+  border-radius: 0 !important;
+  background: rgba($orange, 0.14) !important;
+  border-color: rgba($orange, 0.28) !important;
+  color: $orange !important;
+}
+
+.btnAccept {
+  background: $orange !important;
+  color: $obsidian !important;
+  border-radius: 8px !important;
+  &:hover { filter: brightness(1.08); }
+}
+
+.btnDecline,
+.btnEssential {
+  border-radius: 8px !important;
+}
+/* end cookie uniqueness */
