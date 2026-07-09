@@ -1,132 +1,260 @@
+// _archetype-library/hero-c-map-anchored/Component.tsx
+//
+// Hero C: Map-Anchored — left copy, right pure CSS/SVG service-area map graphic.
+// Center pin, satellite pins at x/y %, pulsing radius rings. No Mapbox.
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { PhoneIcon, ChevronIcon, CheckIcon, PinIcon } from './_shared/icons';
 import styles from './styles.module.scss';
 
-function ParticleCanvas() {
-  const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = ref.current; if (!canvas) return;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-    resize(); window.addEventListener('resize', resize);
-    const pts = Array.from({ length: 38 }, () => ({
-      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-      r: Math.random() * 5 + 0.5, vx: (Math.random() - 0.5) * 3,
-      vy: Math.random() * 0.25 + 0.06, o: Math.random() * 0.35 + 0.7,
-      flake: Math.random() > 0.3,
-    }));
-    let raf: number;
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pts.forEach(p => {
-        ctx.save(); ctx.globalAlpha = p.o;
-        if (p.flake) {
-          ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 0.6;
-          ctx.translate(p.x, p.y);
-          for (let i = 0; i < 6; i++) { ctx.rotate(Math.PI / 3); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, p.r * 3.2); ctx.stroke(); }
-        } else { ctx.fillStyle = '#0284c7'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
-        ctx.restore();
-        p.x += p.vx; p.y += p.vy;
-        if (p.y > canvas.height + 10) { p.y = -10; p.x = Math.random() * canvas.width; }
-        if (p.x < -10) p.x = canvas.width + 10;
-        if (p.x > canvas.width + 10) p.x = -10;
-      });
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
-  }, []);
-  return <canvas ref={ref} className={styles.particleCanvas} aria-hidden="true" />;
-}
-
-function TempMeter() {
-  const [fill, setFill] = useState(0);
-  useEffect(() => { const t = setTimeout(() => setFill(88), 750); return () => clearTimeout(t); }, []);
+function ServiceAreaMap({
+  mapCenterLabel,
+  mapPins,
+  coverageLabel,
+}: {
+  mapCenterLabel: string;
+  mapPins: Array<{ label: string; x: number; y: number }>;
+  coverageLabel?: string;
+}) {
   return (
-    <div className={styles.thermo} aria-hidden="true">
-      <div className={styles.thermoColumn}>
-        <div className={styles.thermoTube}>
-          <motion.div
-            className={styles.thermoFill}
-            initial={{ height: '0%' }}
-            animate={{ height: `${fill}%` }}
-            transition={{ duration: 2.0, delay: 0.85, ease: [0.34, 1.2, 0.64, 1] }}
-          />
+    <div className={styles.mapCard} role="img" aria-label={`Service area map centered on ${mapCenterLabel}`}>
+      {/* Stylized map background — grid + soft terrain blobs */}
+      <svg className={styles.mapSvg} viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <radialGradient id="mapGlow" cx="50%" cy="48%" r="55%">
+            <stop offset="0%" stopColor="rgba(249, 115, 22, 0.14)" />
+            <stop offset="55%" stopColor="rgba(249, 115, 22, 0.04)" />
+            <stop offset="100%" stopColor="rgba(0, 0, 0, 0)" />
+          </radialGradient>
+          <pattern id="mapGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.045)" strokeWidth="1" />
+          </pattern>
+        </defs>
+
+        <rect width="400" height="320" fill="url(#mapGrid)" />
+        <rect width="400" height="320" fill="url(#mapGlow)" />
+
+        {/* Abstract road traces */}
+        <path
+          d="M -10 80 Q 100 60 180 120 T 410 90"
+          fill="none"
+          stroke="rgba(255,255,255,0.07)"
+          strokeWidth="3"
+        />
+        <path
+          d="M 40 340 Q 120 200 220 210 T 420 160"
+          fill="none"
+          stroke="rgba(255,255,255,0.05)"
+          strokeWidth="2.5"
+        />
+        <path
+          d="M -20 200 Q 140 180 200 40 T 360 -10"
+          fill="none"
+          stroke="rgba(255,255,255,0.04)"
+          strokeWidth="2"
+        />
+
+        {/* Soft district shapes */}
+        <ellipse cx="120" cy="90" rx="70" ry="48" fill="rgba(255,255,255,0.025)" />
+        <ellipse cx="300" cy="230" rx="85" ry="55" fill="rgba(255,255,255,0.02)" />
+        <ellipse cx="280" cy="80" rx="50" ry="36" fill="rgba(249,115,22,0.04)" />
+      </svg>
+
+      {/* Pulsing coverage rings (center) */}
+      <div className={styles.rings} aria-hidden="true">
+        <span className={`${styles.ring} ${styles.ring1}`} />
+        <span className={`${styles.ring} ${styles.ring2}`} />
+        <span className={`${styles.ring} ${styles.ring3}`} />
+      </div>
+
+      {/* Center hub pin */}
+      <div className={styles.centerPin}>
+        <div className={styles.centerPinIcon}>
+          <PinIcon size={20} />
         </div>
-        <div className={styles.thermoBulb} />
+        <span className={styles.centerLabel}>{mapCenterLabel}</span>
       </div>
-      <div className={styles.thermoLabels}>
-        <span className={styles.thermoTop}>Green</span>
-        <span className={styles.thermoMid}>Waco, TX</span>
-        <span className={styles.thermoBot}>Efficient</span>
-      </div>
+
+      {/* Satellite pins */}
+      {mapPins.map((pin) => (
+        <div
+          key={`${pin.label}-${pin.x}-${pin.y}`}
+          className={styles.satPin}
+          style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+        >
+          <span className={styles.satDot} />
+          <span className={styles.satLabel}>{pin.label}</span>
+        </div>
+      ))}
+
+      {coverageLabel && (
+        <div className={styles.coverageBadge}>
+          <span className={styles.coverageDot} />
+          {coverageLabel}
+        </div>
+      )}
     </div>
   );
 }
 
-const CHIPS = ['Same-Day Service', 'No Contracts', 'Licensed Irrigator', '14+ Yrs Local', 'Green Lawn Guarantee'];
-
 export default function WelcomePage() {
+const badgeText = 'Waco\'s Most Trusted Irrigation Pros — Since 2012';
+const headlineLines = [
+  'Greener Lawns.',
+  'Smarter Water.',
+];
+const headlineAccent = 'AquaArc Irrigation.';
+const subheadline = 'Sprinklers · Drip · Smart Controllers · Repair. Flat-rate pricing. Same-day service. Green Lawn Guarantee · 2-Year Parts on New Installs. Serving Waco and Central Texas with licensed irrigators.';
+const primaryCta = { label: 'Call (254) 990-2020', href: 'tel:+12549902020' };
+const secondaryCta = { label: 'Free Estimate', href: '/contact' };
+const chips = [
+  'Same-Day Service',
+  'No Contracts',
+  'Licensed Irrigator',
+  '14+ Yrs Local',
+  'Green Lawn Guarantee',
+];
+const stats = [
+  {
+    "value": "500+",
+    "label": "Jobs Done"
+  },
+  {
+    "value": "4.9 ★",
+    "label": "Rating"
+  },
+  {
+    "value": "15+",
+    "label": "Years Local"
+  },
+  {
+    "value": "1-Yr",
+    "label": "Warranty"
+  }
+];
+const meterTarget = 72;
+const meterTopLabel = "Peak";
+const meterMidLabel = "Local";
+const meterBotLabel = "Base";
+const particleColor = '#4ade80';
+const beforeImageSrc = '/pages/home/welcome/before.jpg';
+const afterImageSrc = '/pages/home/welcome/after.jpg';
+const beforeLabel = "Brown rings";
+const afterLabel = "Even coverage";
+const mapCenterLabel = 'Service HQ';
+const mapPins = [
+  { label: 'Waco', x: 42, y: 48 },
+  { label: 'Temple', x: 68, y: 62 },
+  { label: 'Killeen', x: 58, y: 72 },
+];
+const coverageLabel = 'Central Texas coverage';
+const materials = [
+  { name: "Repair", swatch: "#4ade80", imageSrc: "/pages/home/welcome/mat-1.jpg" },
+  { name: "Zones", swatch: "#22c55e", imageSrc: "/pages/home/welcome/mat-2.jpg" },
+  { name: "Drip", swatch: "#86efac", imageSrc: "/pages/home/welcome/mat-3.jpg" },
+  { name: "Controller", swatch: "#16a34a", imageSrc: "/pages/home/welcome/mat-1.jpg" },
+  { name: "Rain Sensor", swatch: "#15803d", imageSrc: "/pages/home/welcome/mat-2.jpg" },
+  { name: "Commercial", swatch: "#14532d", imageSrc: "/pages/home/welcome/mat-3.jpg" }
+];
+const quote = "Found three leaks we never knew about. Water bill dropped and the yard filled in.";
+const authorName = "Mike S.";
+const authorMeta = "Irrigation repair · Woodway";
+const rating = 5;
+const schematicLabel = "AquaArc schematic";
+const gauges = [
+  { label: "Systems", value: "3,600+" },
+  { label: "Rating", value: "4.8 ★" },
+  { label: "Leak detect", value: "Yes" },
+  { label: "Smart", value: "Supported" }
+];
+const toggles = [
+  { label: "Licensed crew", on: true },
+  { label: "Same-week", on: true },
+  { label: "Warrantied", on: true }
+];
+const textureSrc = '/pages/home/welcome/hero-main.jpg';
+const textureAlt = 'Texture';
+const accentWord = "AquaArc";
+
   return (
     <section className={styles.hero} aria-label="Hero">
-      <ParticleCanvas />
       <div className={styles.shard} aria-hidden="true" />
 
       <div className={styles.layout}>
-
         <div className={styles.content}>
-          <motion.div className={styles.badge}
-            initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}>
+          <motion.div
+            className={styles.badge}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <span className={styles.badgeDot} />
-            Waco&apos;s Most Trusted Irrigation Pros — Since 2012
+            {badgeText}
           </motion.div>
 
-          <motion.h1 className={styles.headline}
-            initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}>
-            Greener Lawns.<br />Smarter Water.<br />
-            <span className={styles.accentLine}>AquaArc Irrigation.</span>
+          <motion.h1
+            className={styles.headline}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {headlineLines.map((line, i) => (
+              <React.Fragment key={i}>{line}<br /></React.Fragment>
+            ))}
+            <span className={styles.accentLine}>{headlineAccent}</span>
           </motion.h1>
 
-          <motion.p className={styles.sub}
-            initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.22 }}>
-            Sprinklers · Drip · Smart Controllers · Repair. Flat-rate pricing. Same-day service.
-            Green Lawn Guarantee · 2-Year Parts on New Installs. Serving Waco and Central Texas with licensed irrigators.
+          <motion.p
+            className={styles.sub}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.22 }}
+          >
+            {subheadline}
           </motion.p>
 
-          <motion.div className={styles.ctaRow}
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.34 }}>
-            <a href="tel:+12549902020" className={styles.ctaPrimary}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.17 12a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              Call (254) 990-2020
+          <motion.div
+            className={styles.ctaRow}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.34 }}
+          >
+            <a href={primaryCta.href} className={styles.ctaPrimary}>
+              <PhoneIcon size={15} /> {primaryCta.label}
             </a>
-            <Link href="/contact" className={styles.ctaSecondary}>
-              Free Estimate
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
+            <Link href={secondaryCta.href} className={styles.ctaSecondary}>
+              {secondaryCta.label} <ChevronIcon size={12} />
             </Link>
           </motion.div>
 
-          <motion.div className={styles.chips}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.45 }}>
-            {CHIPS.map((c) => (
-              <span key={c} className={styles.chip}>{c}</span>
+          <motion.div
+            className={styles.chips}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.48 }}
+          >
+            {chips.map((c) => (
+              <span key={c} className={styles.chip}>
+                <CheckIcon size={9} /> {c}
+              </span>
             ))}
           </motion.div>
         </div>
 
-        <div className={styles.visual} aria-hidden="true">
-          <TempMeter />
-        </div>
+        <motion.div
+          className={styles.visual}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.28, ease: 'easeOut' }}
+        >
+          <ServiceAreaMap
+            mapCenterLabel={mapCenterLabel}
+            mapPins={mapPins}
+            coverageLabel={coverageLabel}
+          />
+        </motion.div>
       </div>
     </section>
   );

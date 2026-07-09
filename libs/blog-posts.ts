@@ -19,7 +19,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Water Savings',
     date:     'July 3, 2026',
     readTime: 7,
-    imageSrc: '/pages/blogs/energy-savings.jpg',
+    imageSrc: '/pages/home/welcome/after.jpg',
     imageAlt: 'Smart irrigation controller water savings guide for Central Texas',
     featured: true,
   },
@@ -30,7 +30,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Design',
     date:     'June 24, 2026',
     readTime: 6,
-    imageSrc: '/pages/blogs/hvac-filter.jpg',
+    imageSrc: '/pages/home/services/service-2.jpg',
     imageAlt: 'Drip vs spray irrigation comparison for Waco TX landscapes',
   },
   {
@@ -40,7 +40,7 @@ const ALL_POSTS: BlogPost[] = [
     category: 'Maintenance',
     date:     'June 15, 2026',
     readTime: 8,
-    imageSrc: '/pages/blogs/ac-replacement.jpg',
+    imageSrc: '/pages/home/welcome/hero-main.jpg',
     imageAlt: 'How often to run sprinklers in Texas summer heat',
   },
 ];

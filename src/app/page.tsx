@@ -35,36 +35,42 @@ export default function HomePage() {
       title: "Sprinkler Installation",
       body: "Custom-designed systems for Texas heat — efficient zones, quality heads, smart-ready controllers, and a Green Lawn Guarantee on every install.",
       link: "/services/sprinkler-install",
+      image: "/pages/home/services/service-1.jpg",
     },
     {
       icon: faWrench,
       title: "Sprinkler Repair",
       body: "Broken heads, leaks, low pressure, stuck valves, and dry zones. Same-day diagnosis with common parts stocked on every truck.",
       link: "/services/sprinkler-repair",
+      image: "/pages/home/services/service-2.jpg",
     },
     {
       icon: faSeedling,
       title: "Drip Irrigation",
       body: "Beds, trees, and gardens watered at the root zone — less waste, healthier plants, no overspray on hardscape.",
       link: "/services/drip-irrigation",
+      image: "/pages/home/services/service-3.jpg",
     },
     {
       icon: faCogs,
       title: "Smart Controllers",
       body: "Weather-based schedules, app control, and real water savings — installed and programmed correctly.",
       link: "/services/smart-controllers",
+      image: "/pages/home/services/service-4.jpg",
     },
     {
       icon: faSnowflake,
       title: "Winterization",
       body: "Freeze prep and backflow protection so short Texas freezes don't split pipes and valves overnight.",
       link: "/services/winterization",
+      image: "/pages/home/services/service-1.jpg",
     },
     {
       icon: faCalendarCheck,
       title: "Seasonal Tune-Ups",
       body: "Spring start-up, summer efficiency checks, and fall prep so coverage stays even and water bills stay sane.",
       link: "/services/seasonal-tuneups",
+      image: "/pages/home/services/service-2.jpg",
     },
   ];
 
@@ -165,28 +171,30 @@ export default function HomePage() {
       <WelcomePage />
       <TrustBar headline="4.9★ · 1,050+ reviews · 8,000+ systems serviced across Central Texas" />
       <div className={styles.section}>
-        <ImpactMetrics metrics={metrics} cityName="Waco" />
+        <ServiceCardComponent heading="Irrigation Services Built for Central Texas" cards={services} />
       </div>
       <div className={styles.section}>
-        <ServiceCardComponent heading="Irrigation Services Built for Central Texas" cards={services} />
+        <ImpactMetrics metrics={metrics} cityName="Waco" />
       </div>
       <div className={styles.section}>
         <WhyChooseUs cityName="Waco" features={whyFeatures} title="Why Homeowners Choose AquaArc" />
       </div>
-      <CTABanner
-        headline="Ready for a Greener Lawn and Smarter Watering?"
-        subline="Same-day appointments available. Flat-rate pricing. Green Lawn Guarantee · 2-Year Parts on New Installs."
-        primaryText="Call (254) 990-2020"
-        primaryLink="tel:+12549902020"
-        secondaryText="Free Estimate"
-        secondaryLink="/contact"
-      />
       <div className={styles.section}>
         <ProcessTimeline steps={processSteps} />
       </div>
       <div className={styles.section}>
         <Testimonials testimonials={reviews} />
       </div>
+      <CTABanner
+        headline="Green Lawns. Smart Water."
+        subline="Sprinkler repair, seasonal start-ups, and smart controllers that stop wasting water on Texas clay."
+        primaryText="Call (254) 990-2020"
+        primaryLink="tel:+12549902020"
+        secondaryText="Book Sprinkler Tech"
+        secondaryLink="/contact"
+      
+        imageSrc="/pages/home/welcome/hero-main.jpg"
+       />
       <div className={styles.section}>
         <GuaranteeSection />
       </div>
