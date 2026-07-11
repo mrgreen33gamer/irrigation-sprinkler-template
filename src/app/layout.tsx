@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     siteName: "AquaArc Irrigation",
     images: [
       {
-        url: `${BASE_URL}/logos/scott-apps-banner.png?v=1`,
+        url: `${BASE_URL}/pages/home/welcome/hero-main.jpg`,
         width: 1200,
         height: 630,
         alt: "AquaArc Irrigation — Waco TX Sprinklers & Drip Irrigation",
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     title: "AquaArc Irrigation | Waco TX Irrigation Pros",
     description:
       "Sprinkler install, repair, drip, smart controllers & seasonal service for Central Texas. Licensed irrigators — Green Lawn Guarantee.",
-    images: [`${BASE_URL}/logos/scott-apps-banner.png?v=1`],
+    images: [`${BASE_URL}/pages/home/welcome/hero-main.jpg`],
   },
   robots: {
     index: true,

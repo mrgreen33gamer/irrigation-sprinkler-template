@@ -63,14 +63,14 @@ export default function HomePage() {
       title: "Winterization",
       body: "Freeze prep and backflow protection so short Texas freezes don't split pipes and valves overnight.",
       link: "/services/winterization",
-      image: "/pages/home/services/service-1.jpg",
+      image: "/pages/home/welcome/before.jpg",
     },
     {
       icon: faCalendarCheck,
       title: "Seasonal Tune-Ups",
       body: "Spring start-up, summer efficiency checks, and fall prep so coverage stays even and water bills stay sane.",
       link: "/services/seasonal-tuneups",
-      image: "/pages/home/services/service-2.jpg",
+      image: "/pages/home/welcome/after.jpg",
     },
   ];
 
